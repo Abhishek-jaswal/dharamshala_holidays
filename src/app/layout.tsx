@@ -7,11 +7,6 @@ import { CallFloatingButton } from "@/components/shared/CallFloatingButton";
 import { getLocalBusinessSchema } from "@/lib/schema";
 import { SITE, BUSINESS } from "@/constants/business";
 
-// Fonts are loaded via CSS @import in globals.css
-// This avoids build-time Google Fonts fetch errors in restricted environments
-const displayFont = { variable: "--font-display" };
-const bodyFont = { variable: "--font-body" };
-
 export const metadata: Metadata = {
   metadataBase: new URL(SITE.url),
   title: {
@@ -27,10 +22,6 @@ export const metadata: Metadata = {
     follow: true,
     googleBot: { index: true, follow: true },
   },
-  verification: {
-    // ✏️ Add your Google Search Console verification code
-    // google: "your-verification-code",
-  },
 };
 
 export default function RootLayout({
@@ -41,8 +32,17 @@ export default function RootLayout({
   const schema = getLocalBusinessSchema();
 
   return (
-    <html lang="en-IN" className={`${displayFont.variable} ${bodyFont.variable}`}>
+    <html lang="en-IN">
       <head>
+        {/* Preconnect to Google Fonts for faster font loading */}
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+
+        {/* DNS prefetch for external services */}
+        <link rel="dns-prefetch" href="https://wa.me" />
+        <link rel="dns-prefetch" href="https://api.whatsapp.com" />
+
+        {/* Structured data for SEO */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}

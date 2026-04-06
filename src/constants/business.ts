@@ -1,32 +1,27 @@
 // ============================================================
-// BUSINESS CONFIGURATION
+// BUSINESS CONFIGURATION — Dharamshala Holidays
 // Edit these values to update the entire website at once
 // ============================================================
 
 export const BUSINESS = {
-  name: "Dharamshala Taxi & Scooty on Rent",
+  name: "Dharamshala Holidays",
   tagline: "Your Trusted Travel Partner in Dharamshala",
-  shortName: "DT&S",
+  shortName: "DH",
 
-  // ✏️ Replace with real phone number
-  phone: "+91 98765 43210",
-  phoneRaw: "+919876543210",
+  phone: "+91 76500 14729",
+  phoneRaw: "+917650014729",
 
-  // ✏️ Replace with real WhatsApp number (with country code, no +)
-  whatsapp: "919876543210",
-  whatsappMessage: "Hi! I want to book a taxi/scooty in Dharamshala.",
+  // WhatsApp number (with country code, no +)
+  whatsapp: "917650014729",
+  whatsappMessage: "Hi! I found you on Dharamshala Holidays website. I want to book a taxi/scooty. Please share details.",
 
-  // ✏️ Replace with real email
-  email: "info@dharamshala-taxi.com",
+  email: "info@dharamshalaholicays.com",
 
-  // ✏️ Replace with real address
   address: "Near Bus Stand, McLeod Ganj, Dharamshala, Himachal Pradesh 176219",
 
-  // ✏️ Replace with real Google Maps embed URL
   googleMapsEmbed:
     "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3389.1!2d76.3234!3d32.2396!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzLCsDE0JzIyLjYiTiA3NsKwMTknMjQuMiJF!5e0!3m2!1sen!2sin!4v1234567890",
 
-  // ✏️ Replace with real Google Maps link
   googleMapsLink: "https://maps.google.com/?q=McLeod+Ganj+Dharamshala",
 
   businessHours: {
@@ -36,7 +31,6 @@ export const BUSINESS = {
   },
 
   social: {
-    // ✏️ Add your real social links
     instagram: "https://instagram.com/",
     facebook: "https://facebook.com/",
   },
@@ -49,11 +43,12 @@ export const EMAIL_URL = `mailto:${BUSINESS.email}`;
 
 // Site metadata
 export const SITE = {
-  url: "https://dharamshala-taxi.com", // ✏️ Replace with real domain
+  url: "https://dharamshalaholicays.com", // ✏️ Replace with real domain
   name: BUSINESS.name,
   description:
     "Reliable taxi service and scooty on rent in Dharamshala. Affordable rates, well-maintained vehicles, experienced local drivers. Airport pickup, sightseeing, outstation trips.",
   keywords: [
+    "Dharamshala Holidays",
     "taxi service in Dharamshala",
     "scooty on rent in Dharamshala",
     "bike rental Dharamshala",
@@ -95,62 +90,14 @@ export const SERVICES = [
 
 // Popular destinations
 export const DESTINATIONS = [
-  {
-    name: "McLeod Ganj",
-    from: "Dharamshala",
-    distance: "10 km",
-    time: "25 min",
-    price: "₹300–500",
-  },
-  {
-    name: "Bhagsu Waterfall",
-    from: "McLeod Ganj",
-    distance: "3 km",
-    time: "10 min",
-    price: "₹200–300",
-  },
-  {
-    name: "Kangra Fort",
-    from: "Dharamshala",
-    distance: "20 km",
-    time: "40 min",
-    price: "₹500–700",
-  },
-  {
-    name: "Triund Trek Base",
-    from: "McLeod Ganj",
-    distance: "5 km",
-    time: "15 min",
-    price: "₹200–400",
-  },
-  {
-    name: "Dharamkot",
-    from: "McLeod Ganj",
-    distance: "3 km",
-    time: "10 min",
-    price: "₹200–350",
-  },
-  {
-    name: "Kangra Airport",
-    from: "Dharamshala",
-    distance: "15 km",
-    time: "35 min",
-    price: "₹600–900",
-  },
-  {
-    name: "Bir Billing",
-    from: "Dharamshala",
-    distance: "70 km",
-    time: "2.5 hrs",
-    price: "₹2000–2500",
-  },
-  {
-    name: "Dalhousie",
-    from: "Dharamshala",
-    distance: "115 km",
-    time: "4 hrs",
-    price: "₹3500–4500",
-  },
+  { name: "McLeod Ganj", from: "Dharamshala", distance: "10 km", time: "25 min", price: "₹300–500" },
+  { name: "Bhagsu Waterfall", from: "McLeod Ganj", distance: "3 km", time: "10 min", price: "₹200–300" },
+  { name: "Kangra Fort", from: "Dharamshala", distance: "20 km", time: "40 min", price: "₹500–700" },
+  { name: "Triund Trek Base", from: "McLeod Ganj", distance: "5 km", time: "15 min", price: "₹200–400" },
+  { name: "Dharamkot", from: "McLeod Ganj", distance: "3 km", time: "10 min", price: "₹200–350" },
+  { name: "Kangra Airport", from: "Dharamshala", distance: "15 km", time: "35 min", price: "₹600–900" },
+  { name: "Bir Billing", from: "Dharamshala", distance: "70 km", time: "2.5 hrs", price: "₹2000–2500" },
+  { name: "Dalhousie", from: "Dharamshala", distance: "115 km", time: "4 hrs", price: "₹3500–4500" },
 ];
 
 // Testimonials

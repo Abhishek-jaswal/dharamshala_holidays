@@ -49,10 +49,10 @@ export function Navbar() {
         {/* Logo */}
         <Link href="/" className="flex flex-col leading-tight">
           <span className="font-display text-lg font-bold text-brand-700">
-            Dharamshala Taxi
+            Dharamshala Holidays
           </span>
           <span className="text-xs text-gray-500 font-body">
-            &amp; Scooty on Rent Service
+            Taxi · Scooty · Bike · Holidays
           </span>
         </Link>
 

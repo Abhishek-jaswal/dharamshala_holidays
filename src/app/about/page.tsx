@@ -8,7 +8,7 @@ import { buildMetadata } from "@/lib/metadata";
 export const metadata: Metadata = buildMetadata({
   title: "About Us",
   description:
-    "Learn about Dharamshala Taxi & Scooty on Rent Service. Local-born, trusted drivers and rental fleet serving Dharamshala, McLeod Ganj, and Himachal Pradesh since years.",
+    "Learn about Dharamshala Holidays & Scooty on Rent Service. Local-born, trusted drivers and rental fleet serving Dharamshala, McLeod Ganj, and Himachal Pradesh since years.",
   keywords: ["about Dharamshala taxi service", "local taxi Dharamshala", "trusted rental service Dharamshala"],
   path: "/about",
 });

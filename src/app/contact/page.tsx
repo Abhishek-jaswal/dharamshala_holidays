@@ -8,7 +8,7 @@ import { BUSINESS, WHATSAPP_URL, CALL_URL, EMAIL_URL } from "@/constants/busines
 export const metadata: Metadata = buildMetadata({
   title: "Contact Us – Book Taxi or Scooty in Dharamshala",
   description:
-    "Contact Dharamshala Taxi & Scooty on Rent Service for bookings. Call, WhatsApp, or fill the form. Available 24/7 for airport pickups.",
+    "Contact Dharamshala Holidays & Scooty on Rent Service for bookings. Call, WhatsApp, or fill the form. Available 24/7 for airport pickups.",
   path: "/contact",
 });
 
@@ -142,7 +142,7 @@ export default function ContactPage() {
               allowFullScreen
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
-              title="Dharamshala Taxi Service Location"
+              title="Dharamshala Holidays Service Location"
             />
           </div>
           <div className="text-center mt-5">

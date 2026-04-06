@@ -39,10 +39,10 @@ export function Footer() {
           <div className="lg:col-span-2">
             <Link href="/" className="inline-block mb-4">
               <span className="font-display text-xl font-bold text-white block">
-                Dharamshala Taxi
+                Dharamshala Holidays
               </span>
               <span className="text-sm text-gray-400">
-                &amp; Scooty on Rent Service
+                Taxi · Scooty · Bike · Holidays
               </span>
             </Link>
             <p className="text-sm text-gray-400 leading-relaxed mb-6">
@@ -117,7 +117,7 @@ export function Footer() {
       <div className="border-t border-gray-800">
         <div className="container-custom py-6">
           <p className="text-xs text-gray-500 text-center leading-relaxed">
-            Dharamshala Taxi &amp; Scooty on Rent Service — Serving tourists and locals
+            Dharamshala Holidays Taxi · Scooty · Bike · Holidays — Serving tourists and locals
             across Dharamshala, McLeod Ganj, Bhagsu, Naddi, Dharamkot, Triund, Kangra Fort,
             and Kangra Airport. Book a taxi, rent a scooty, or hire a bike in Dharamshala at
             the best rates.

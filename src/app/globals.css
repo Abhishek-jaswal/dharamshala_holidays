@@ -1,6 +1,8 @@
-/* Google Fonts – loaded via CSS for compatibility */
-/* ✏️ These load automatically when deployed. For local dev, ensure network access. */
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=Source+Sans+3:wght@300;400;600;700&display=swap');
+/*
+  Google Fonts — preconnect is done in layout.tsx <head> for faster load.
+  font-display:swap ensures text is visible before fonts finish loading.
+*/
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=Source+Sans+3:wght@300;400;600;700&display=swap&font-display=swap');
 
 :root {
   --font-display: 'Playfair Display';
@@ -20,14 +22,31 @@
 
   html {
     scroll-behavior: smooth;
+    /* Prevent layout shift from scrollbar appearing */
+    scrollbar-gutter: stable;
   }
 
-  h1, h2, h3 {
+  h1,
+  h2,
+  h3 {
     font-family: var(--font-display), Georgia, serif;
   }
 
   body {
     font-family: var(--font-body), system-ui, sans-serif;
+    /* Avoid invisible text during font load */
+    font-display: swap;
+  }
+
+  /* Reduce motion for users who prefer it */
+  @media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+    }
   }
 }
 
@@ -57,13 +76,22 @@
   }
 }
 
-/* Floating buttons animation */
+/* Floating WhatsApp button pulse animation */
 .fab-pulse {
-  animation: fab-pulse 2s infinite;
+  animation: fab-pulse 2.5s ease-in-out infinite;
+  will-change: box-shadow;
 }
 
 @keyframes fab-pulse {
-  0% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.5); }
-  70% { box-shadow: 0 0 0 12px rgba(34, 197, 94, 0); }
-  100% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0); }
+  0% {
+    box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.5);
+  }
+
+  70% {
+    box-shadow: 0 0 0 12px rgba(34, 197, 94, 0);
+  }
+
+  100% {
+    box-shadow: 0 0 0 0 rgba(34, 197, 94, 0);
+  }
 }
