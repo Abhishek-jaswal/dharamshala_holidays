@@ -18,9 +18,7 @@ export const metadata: Metadata = {
   title: "SKD Holidays | Taxi Service & Scooty Rental in Dharamshala",
   description:
     "Book premium taxi service and scooty rentals in Dharamshala with SKD Holidays. Affordable rates, 24/7 Kangra airport pickup, local sightseeing, and outstation trips. Well-maintained vehicles with experienced drivers.",
-  keywords: "SKD holidays Dharamshala, taxi service Dharamshala, scooty rental Dharamshala, bike rental, airport pickup, McLeod Ganj taxi",
-  keywords:
-    "taxi service in Dharamshala, scooty on rent in Dharamshala, bike rental Dharamshala, airport pickup Dharamshala, McLeod Ganj taxi, local sightseeing Dharamshala",
+  keywords: "SKD holidays Dharamshala, taxi service Dharamshala, scooty rental Dharamshala, bike rental, airport pickup, McLeod Ganj taxi, taxi service in Dharamshala, scooty on rent in Dharamshala, bike rental Dharamshala, airport pickup Dharamshala, McLeod Ganj taxi, local sightseeing Dharamshala",
 };
 
 const trustBadges = [
