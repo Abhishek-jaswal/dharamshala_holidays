@@ -1,21 +1,21 @@
 // ============================================================
-// BUSINESS CONFIGURATION — Dharamshala Holidays
+// BUSINESS CONFIGURATION — SKD Holidays
 // Edit these values to update the entire website at once
 // ============================================================
 
 export const BUSINESS = {
-  name: "Dharamshala Holidays",
+  name: "SKD Holidays",
   tagline: "Your Trusted Travel Partner in Dharamshala",
-  shortName: "DH",
+  shortName: "SKD",
 
   phone: "+91 76500 14729",
   phoneRaw: "+917650014729",
 
   // WhatsApp number (with country code, no +)
   whatsapp: "917650014729",
-  whatsappMessage: "Hi! I found you on Dharamshala Holidays website. I want to book a taxi/scooty. Please share details.",
+  whatsappMessage: "Hi! I found you on SKD Holidays website. I want to book a taxi/scooty. Please share details.",
 
-  email: "info@dharamshalaholicays.com",
+  email: "info@skdholidays.com",
 
   address: "Near Bus Stand, McLeod Ganj, Dharamshala, Himachal Pradesh 176219",
 
@@ -43,20 +43,23 @@ export const EMAIL_URL = `mailto:${BUSINESS.email}`;
 
 // Site metadata
 export const SITE = {
-  url: "https://dharamshalaholicays.com", // ✏️ Replace with real domain
+  url: "https://skdholidays.com", // ✏️ Replace with real domain
   name: BUSINESS.name,
   description:
-    "Reliable taxi service and scooty on rent in Dharamshala. Affordable rates, well-maintained vehicles, experienced local drivers. Airport pickup, sightseeing, outstation trips.",
+    "Book premium taxi service & vehicles on rent in Dharamshala with SKD Holidays. Reliable Kangra airport pickup, scooty rentals, local sightseeing, and outstation trips. 24/7 available.",
   keywords: [
-    "Dharamshala Holidays",
+    "SKD Holidays Dharamshala",
     "taxi service in Dharamshala",
     "scooty on rent in Dharamshala",
     "bike rental Dharamshala",
     "car rental Dharamshala",
     "airport pickup Dharamshala",
-    "McLeod Ganj taxi",
+    "McLeod Ganj taxi service",
     "Dharamshala local sightseeing",
     "outstation taxi Dharamshala",
+    "Kangra airport transfer",
+    "Himachal Pradesh taxi",
+    "SKD holidays bookings",
   ],
 };
 

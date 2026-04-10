@@ -1,6 +1,6 @@
-# 🏔️ Dharamshala Holidays — Website
+# 🏔️ SKD Holidays — Website
 
-A fast, SEO-optimised travel & taxi booking website for **Dharamshala Holidays**, built with **Next.js 14**, **Tailwind CSS**, and **TypeScript**.
+A fast, SEO-optimised travel & taxi booking website for **SKD Holidays**, built with **Next.js 14**, **Tailwind CSS**, and **TypeScript**.
 
 ---
 
@@ -8,7 +8,7 @@ A fast, SEO-optimised travel & taxi booking website for **Dharamshala Holidays**
 
 | Detail | Value |
 |--------|-------|
-| **Business Name** | Dharamshala Holidays |
+| **Business Name** | SKD Holidays |
 | **Phone / Call** | +91 76500 14729 |
 | **WhatsApp** | +91 76500 14729 |
 | **WhatsApp Link** | Opens with pre-filled booking message |
@@ -100,12 +100,12 @@ This is the **only file you need to edit** to update all contact info, names, an
 
 ```ts
 export const BUSINESS = {
-  name: "Dharamshala Holidays",
+  name: "SKD Holidays",
   phone: "+91 76500 14729",
   phoneRaw: "+917650014729",
   whatsapp: "917650014729",
-  whatsappMessage: "Hi! I found you on Dharamshala Holidays website...",
-  email: "info@dharamshalaholicays.com",
+  whatsappMessage: "Hi! I found you on SKD Holidays website...",
+  email: "info@skdholidays.com",
   address: "Near Bus Stand, McLeod Ganj, Dharamshala...",
   // ... social links, business hours, maps
 };
@@ -118,7 +118,7 @@ export const BUSINESS = {
 ### WhatsApp Button
 - Floating button (bottom-right, above call button)
 - Opens `https://wa.me/917650014729?text=...` with a **pre-filled message**
-- Message: *"Hi! I found you on Dharamshala Holidays website. I want to book a taxi/scooty. Please share details."*
+- Message: *"Hi! I found you on SKD Holidays website. I want to book a taxi/scooty. Please share details."*
 - Pulse animation to draw attention
 
 ### Call Button
@@ -201,4 +201,4 @@ To change the WhatsApp pre-filled message, edit `whatsappMessage` in `src/consta
 
 ## 📄 License
 
-Private — all rights reserved by Dharamshala Holidays.
+Private — all rights reserved by SKD Holidays.

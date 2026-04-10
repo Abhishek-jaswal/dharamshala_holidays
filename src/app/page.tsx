@@ -15,9 +15,10 @@ import {
 } from "@/constants/business";
 
 export const metadata: Metadata = {
-  title: "Taxi Service & Scooty on Rent in Dharamshala | Affordable Rates",
+  title: "SKD Holidays | Taxi Service & Scooty Rental in Dharamshala",
   description:
-    "Book reliable taxi service and scooty on rent in Dharamshala. Affordable rates, well-maintained vehicles, 24/7 airport pickup from Kangra Airport. Serving McLeod Ganj, Bhagsu, Naddi & beyond.",
+    "Book premium taxi service and scooty rentals in Dharamshala with SKD Holidays. Affordable rates, 24/7 Kangra airport pickup, local sightseeing, and outstation trips. Well-maintained vehicles with experienced drivers.",
+  keywords: "SKD holidays Dharamshala, taxi service Dharamshala, scooty rental Dharamshala, bike rental, airport pickup, McLeod Ganj taxi",
   keywords:
     "taxi service in Dharamshala, scooty on rent in Dharamshala, bike rental Dharamshala, airport pickup Dharamshala, McLeod Ganj taxi, local sightseeing Dharamshala",
 };

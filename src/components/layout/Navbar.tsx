@@ -47,13 +47,23 @@ export function Navbar() {
     >
       <div className="container-custom flex items-center justify-between">
         {/* Logo */}
-        <Link href="/" className="flex flex-col leading-tight">
-          <span className="font-display text-lg font-bold text-brand-700">
-            Dharamshala Holidays
-          </span>
-          <span className="text-xs text-gray-500 font-body">
-            Taxi · Scooty · Bike · Holidays
-          </span>
+        <Link href="/" className="flex items-center gap-2 leading-tight group">
+          {/* Logo image - will use public/logo.svg */}
+          <div className="relative w-10 h-10 flex items-center justify-center">
+            <img
+              src="/logo.svg"
+              alt={BUSINESS.name}
+              className="w-full h-full object-contain group-hover:scale-105 transition-transform"
+            />
+          </div>
+          <div className="flex flex-col">
+            <span className="font-display text-lg font-bold text-brand-700">
+              {BUSINESS.shortName}
+            </span>
+            <span className="text-xs text-gray-500 font-body leading-tight">
+              Holidays
+            </span>
+          </div>
         </Link>
 
         {/* Desktop Nav */}
