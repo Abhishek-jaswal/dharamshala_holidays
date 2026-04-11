@@ -218,3 +218,45 @@
 .glow-animation {
   animation: glow 2s ease-in-out infinite;
 }
+/* ── SCROLL-TRIGGERED REVEAL ANIMATIONS ── */
+@keyframes revealUp {
+  from { opacity: 0; transform: translateY(40px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes revealLeft {
+  from { opacity: 0; transform: translateX(-40px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes revealRight {
+  from { opacity: 0; transform: translateX(40px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+.reveal-up    { animation: revealUp    0.7s ease both; }
+.reveal-left  { animation: revealLeft  0.7s ease both; }
+.reveal-right { animation: revealRight 0.7s ease both; }
+
+/* Stagger delays for children */
+.stagger > *:nth-child(1) { animation-delay: 0.05s; }
+.stagger > *:nth-child(2) { animation-delay: 0.15s; }
+.stagger > *:nth-child(3) { animation-delay: 0.25s; }
+.stagger > *:nth-child(4) { animation-delay: 0.35s; }
+
+/* ── SMOOTH SCROLLBAR ── */
+html {
+  scroll-behavior: smooth;
+}
+
+/* ── MOBILE TOUCH SCROLLING ── */
+* {
+  -webkit-overflow-scrolling: touch;
+}
+
+/* ── HERO SCENE CANVAS FIX ── */
+.hero-canvas canvas {
+  display: block !important;
+  width: 100% !important;
+  height: 100% !important;
+}

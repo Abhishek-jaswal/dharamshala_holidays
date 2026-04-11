@@ -1,96 +1,61 @@
 'use client';
 
-import { Canvas, useFrame } from '@react-three/fiber';
+import { useEffect, useRef } from 'react';
 import * as THREE from 'three';
-import { useRef, useState, useEffect } from 'react';
 
-function AnimatedBackground() {
-    const meshRef = useRef<THREE.Mesh>(null);
-    const materialsRef = useRef<THREE.Material[]>([]);
+// Lightweight particle background for inner pages (no road scene)
+export function AnimatedBgCanvas({ className = '' }: { className?: string }) {
+  const mountRef = useRef<HTMLDivElement>(null);
 
-    useFrame((state) => {
-        if (meshRef.current) {
-            meshRef.current.rotation.x += 0.0002;
-            meshRef.current.rotation.y += 0.0003;
-            meshRef.current.position.z = Math.sin(state.clock.elapsedTime * 0.5) * 2;
-        }
-    });
+  useEffect(() => {
+    const mount = mountRef.current;
+    if (!mount) return;
 
-    return (
-        <>
-            {/* Animated background mesh */}
-            <mesh ref={meshRef} scale={[2, 2, 2]}>
-                <icosahedronGeometry args={[1, 8]} />
-                <meshPhongMaterial
-                    color="#FF6B35"
-                    emissive="#ea580c"
-                    wireframe={false}
-                    opacity={0.3}
-                    transparent
-                />
-            </mesh>
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(70, mount.clientWidth / mount.clientHeight, 0.1, 100);
+    camera.position.z = 5;
 
-            {/* Particle system */}
-            <ParticleSystem />
+    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+    renderer.setSize(mount.clientWidth, mount.clientHeight);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    mount.appendChild(renderer.domElement);
 
-            {/* Lights */}
-            <ambientLight intensity={0.6} />
-            <pointLight position={[10, 10, 10]} intensity={0.8} color="#FFB01B" />
-            <pointLight position={[-10, -10, 10]} intensity={0.5} color="#FF6B35" />
-        </>
-    );
-}
-
-function ParticleSystem() {
-    const particlesRef = useRef<THREE.Points>(null);
-
-    useFrame(() => {
-        if (particlesRef.current) {
-            particlesRef.current.rotation.x += 0.0001;
-            particlesRef.current.rotation.y += 0.0002;
-        }
-    });
-
-    const particleGeometry = new THREE.BufferGeometry();
-    const particleCount = 200;
-    const positionArray = new Float32Array(particleCount * 3);
-
-    for (let i = 0; i < particleCount * 3; i += 3) {
-        positionArray[i] = (Math.random() - 0.5) * 10;
-        positionArray[i + 1] = (Math.random() - 0.5) * 10;
-        positionArray[i + 2] = (Math.random() - 0.5) * 10;
+    // Particle stars
+    const geo = new THREE.BufferGeometry();
+    const count = 400;
+    const pos = new Float32Array(count * 3);
+    for (let i = 0; i < count * 3; i++) {
+      pos[i] = (Math.random() - 0.5) * 30;
     }
+    geo.setAttribute('position', new THREE.BufferAttribute(pos, 3));
+    const mat = new THREE.PointsMaterial({ color: 0xffffff, size: 0.06, transparent: true, opacity: 0.5 });
+    const points = new THREE.Points(geo, mat);
+    scene.add(points);
 
-    particleGeometry.setAttribute('position', new THREE.BufferAttribute(positionArray, 3));
+    const handleResize = () => {
+      if (!mount) return;
+      camera.aspect = mount.clientWidth / mount.clientHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(mount.clientWidth, mount.clientHeight);
+    };
+    window.addEventListener('resize', handleResize);
 
-    return (
-        <points ref={particlesRef} geometry={particleGeometry}>
-            <pointsMaterial
-                size={0.05}
-                sizeAttenuation={true}
-                color="#FCD34D"
-                transparent={true}
-                opacity={0.6}
-            />
-        </points>
-    );
-}
+    let id: number;
+    function animate() {
+      id = requestAnimationFrame(animate);
+      points.rotation.x += 0.0002;
+      points.rotation.y += 0.0003;
+      renderer.render(scene, camera);
+    }
+    animate();
 
-interface AnimatedBgProps {
-    className?: string;
-    opacity?: number;
-}
+    return () => {
+      cancelAnimationFrame(id);
+      window.removeEventListener('resize', handleResize);
+      renderer.dispose();
+      if (mount.contains(renderer.domElement)) mount.removeChild(renderer.domElement);
+    };
+  }, []);
 
-export function AnimatedBgCanvas({ className = '', opacity = 0.5 }: AnimatedBgProps) {
-    return (
-        <div className={`absolute inset-0 -z-10 ${className}`}>
-            <Canvas camera={{ position: [0, 0, 5], fov: 50 }}>
-                <AnimatedBackground />
-            </Canvas>
-            <div
-                className="absolute inset-0 bg-gradient-to-r from-slate-900 to-brand-900"
-                style={{ opacity }}
-            />
-        </div>
-    );
+  return <div ref={mountRef} className={`absolute inset-0 -z-10 ${className}`} />;
 }

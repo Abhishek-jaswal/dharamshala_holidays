@@ -1,135 +1,20 @@
 {
   "pages": {
-    "/not-found": [
-      "static/chunks/webpack-c84e7b3dbc67fa68.js",
-      "static/chunks/fd9d1056-ad2ded2c71bef4a1.js",
-      "static/chunks/23-7ead7a4e34e1024c.js",
-      "static/chunks/main-app-0a6aa5ebeecc2193.js",
-      "static/chunks/231-281ca11a745b98b1.js",
-      "static/chunks/app/not-found-9fc76d791ab803cd.js"
-    ],
-    "/_not-found/page": [
-      "static/chunks/webpack-c84e7b3dbc67fa68.js",
-      "static/chunks/fd9d1056-ad2ded2c71bef4a1.js",
-      "static/chunks/23-7ead7a4e34e1024c.js",
-      "static/chunks/main-app-0a6aa5ebeecc2193.js",
-      "static/chunks/app/_not-found/page-3fb1e6d314c2d9fd.js"
+    "/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/page.js"
     ],
     "/layout": [
-      "static/chunks/webpack-c84e7b3dbc67fa68.js",
-      "static/chunks/fd9d1056-ad2ded2c71bef4a1.js",
-      "static/chunks/23-7ead7a4e34e1024c.js",
-      "static/chunks/main-app-0a6aa5ebeecc2193.js",
-      "static/css/94fd0b36bed78e88.css",
-      "static/chunks/231-281ca11a745b98b1.js",
-      "static/chunks/661-473a0ab40a0d297d.js",
-      "static/chunks/app/layout-dcd588904791b89d.js"
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/css/app/layout.css",
+      "static/chunks/app/layout.js"
     ],
-    "/about/page": [
-      "static/chunks/webpack-c84e7b3dbc67fa68.js",
-      "static/chunks/fd9d1056-ad2ded2c71bef4a1.js",
-      "static/chunks/23-7ead7a4e34e1024c.js",
-      "static/chunks/main-app-0a6aa5ebeecc2193.js",
-      "static/chunks/231-281ca11a745b98b1.js",
-      "static/chunks/app/about/page-0cb72606e7160316.js"
-    ],
-    "/faq/page": [
-      "static/chunks/webpack-c84e7b3dbc67fa68.js",
-      "static/chunks/fd9d1056-ad2ded2c71bef4a1.js",
-      "static/chunks/23-7ead7a4e34e1024c.js",
-      "static/chunks/main-app-0a6aa5ebeecc2193.js",
-      "static/chunks/231-281ca11a745b98b1.js",
-      "static/chunks/661-473a0ab40a0d297d.js",
-      "static/chunks/app/faq/page-593a5750bf813056.js"
-    ],
-    "/contact/page": [
-      "static/chunks/webpack-c84e7b3dbc67fa68.js",
-      "static/chunks/fd9d1056-ad2ded2c71bef4a1.js",
-      "static/chunks/23-7ead7a4e34e1024c.js",
-      "static/chunks/main-app-0a6aa5ebeecc2193.js",
-      "static/chunks/231-281ca11a745b98b1.js",
-      "static/chunks/app/contact/page-816e57a8cb6afbf1.js"
-    ],
-    "/gallery/page": [
-      "static/chunks/webpack-c84e7b3dbc67fa68.js",
-      "static/chunks/fd9d1056-ad2ded2c71bef4a1.js",
-      "static/chunks/23-7ead7a4e34e1024c.js",
-      "static/chunks/main-app-0a6aa5ebeecc2193.js",
-      "static/chunks/231-281ca11a745b98b1.js",
-      "static/chunks/app/gallery/page-73379d5107ca6bbf.js"
-    ],
-    "/destinations/page": [
-      "static/chunks/webpack-c84e7b3dbc67fa68.js",
-      "static/chunks/fd9d1056-ad2ded2c71bef4a1.js",
-      "static/chunks/23-7ead7a4e34e1024c.js",
-      "static/chunks/main-app-0a6aa5ebeecc2193.js",
-      "static/chunks/231-281ca11a745b98b1.js",
-      "static/chunks/app/destinations/page-ff4691a4c06c372e.js"
-    ],
-    "/pricing/page": [
-      "static/chunks/webpack-c84e7b3dbc67fa68.js",
-      "static/chunks/fd9d1056-ad2ded2c71bef4a1.js",
-      "static/chunks/23-7ead7a4e34e1024c.js",
-      "static/chunks/main-app-0a6aa5ebeecc2193.js",
-      "static/chunks/231-281ca11a745b98b1.js",
-      "static/chunks/app/pricing/page-b371948c5b18de4c.js"
-    ],
-    "/services/bike-on-rent/page": [
-      "static/chunks/webpack-c84e7b3dbc67fa68.js",
-      "static/chunks/fd9d1056-ad2ded2c71bef4a1.js",
-      "static/chunks/23-7ead7a4e34e1024c.js",
-      "static/chunks/main-app-0a6aa5ebeecc2193.js",
-      "static/chunks/231-281ca11a745b98b1.js",
-      "static/chunks/661-473a0ab40a0d297d.js",
-      "static/chunks/app/services/bike-on-rent/page-20cbcf62c1fc1084.js"
-    ],
-    "/services/airport-pickup/page": [
-      "static/chunks/webpack-c84e7b3dbc67fa68.js",
-      "static/chunks/fd9d1056-ad2ded2c71bef4a1.js",
-      "static/chunks/23-7ead7a4e34e1024c.js",
-      "static/chunks/main-app-0a6aa5ebeecc2193.js",
-      "static/chunks/231-281ca11a745b98b1.js",
-      "static/chunks/661-473a0ab40a0d297d.js",
-      "static/chunks/app/services/airport-pickup/page-ac0b9f893770684f.js"
-    ],
-    "/services/scooty-on-rent/page": [
-      "static/chunks/webpack-c84e7b3dbc67fa68.js",
-      "static/chunks/fd9d1056-ad2ded2c71bef4a1.js",
-      "static/chunks/23-7ead7a4e34e1024c.js",
-      "static/chunks/main-app-0a6aa5ebeecc2193.js",
-      "static/chunks/b536a0f1-53ec7ff7e8d000ff.js",
-      "static/chunks/231-281ca11a745b98b1.js",
-      "static/chunks/661-473a0ab40a0d297d.js",
-      "static/chunks/354-d6fb4d9174f3e589.js",
-      "static/chunks/app/services/scooty-on-rent/page-49d1caa909fc175a.js"
-    ],
-    "/page": [
-      "static/chunks/webpack-c84e7b3dbc67fa68.js",
-      "static/chunks/fd9d1056-ad2ded2c71bef4a1.js",
-      "static/chunks/23-7ead7a4e34e1024c.js",
-      "static/chunks/main-app-0a6aa5ebeecc2193.js",
-      "static/chunks/231-281ca11a745b98b1.js",
-      "static/chunks/661-473a0ab40a0d297d.js",
-      "static/chunks/app/page-cd11d847aa6c122a.js"
-    ],
-    "/services/page": [
-      "static/chunks/webpack-c84e7b3dbc67fa68.js",
-      "static/chunks/fd9d1056-ad2ded2c71bef4a1.js",
-      "static/chunks/23-7ead7a4e34e1024c.js",
-      "static/chunks/main-app-0a6aa5ebeecc2193.js",
-      "static/chunks/231-281ca11a745b98b1.js",
-      "static/chunks/app/services/page-b39dc925ae4ccd8d.js"
-    ],
-    "/services/taxi/page": [
-      "static/chunks/webpack-c84e7b3dbc67fa68.js",
-      "static/chunks/fd9d1056-ad2ded2c71bef4a1.js",
-      "static/chunks/23-7ead7a4e34e1024c.js",
-      "static/chunks/main-app-0a6aa5ebeecc2193.js",
-      "static/chunks/b536a0f1-53ec7ff7e8d000ff.js",
-      "static/chunks/231-281ca11a745b98b1.js",
-      "static/chunks/661-473a0ab40a0d297d.js",
-      "static/chunks/354-d6fb4d9174f3e589.js",
-      "static/chunks/app/services/taxi/page-9fcc7d6ddebc4959.js"
+    "/not-found": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/not-found.js"
     ]
   }
 }
