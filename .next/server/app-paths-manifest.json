@@ -1,4 +1,17 @@
 {
+  "/_not-found/page": "app/_not-found/page.js",
+  "/robots.txt/route": "app/robots.txt/route.js",
+  "/sitemap.xml/route": "app/sitemap.xml/route.js",
+  "/about/page": "app/about/page.js",
+  "/faq/page": "app/faq/page.js",
+  "/contact/page": "app/contact/page.js",
+  "/gallery/page": "app/gallery/page.js",
+  "/destinations/page": "app/destinations/page.js",
+  "/pricing/page": "app/pricing/page.js",
+  "/services/bike-on-rent/page": "app/services/bike-on-rent/page.js",
+  "/services/airport-pickup/page": "app/services/airport-pickup/page.js",
+  "/services/scooty-on-rent/page": "app/services/scooty-on-rent/page.js",
   "/page": "app/page.js",
-  "/_not-found/page": "app/_not-found/page.js"
+  "/services/page": "app/services/page.js",
+  "/services/taxi/page": "app/services/taxi/page.js"
 }

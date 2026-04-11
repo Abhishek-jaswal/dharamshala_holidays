@@ -6,7 +6,7 @@ import { Breadcrumbs } from "@/components/shared/Breadcrumbs";
 import { SectionHeading } from "@/components/shared/SectionHeading";
 import { buildMetadata } from "@/lib/metadata";
 import { WHATSAPP_URL, CALL_URL, DESTINATIONS } from "@/constants/business";
-import { Taxi3D } from "@/components/animated/Taxi3D";
+import { TaxiThreeD } from "@/components/animated/TaxiThreeD";
 import { AnimatedCard, AnimatedContainer, AnimatedItem, AnimatedRevealText } from "@/components/animated/AnimatedComponents";
 
 export const metadata: Metadata = buildMetadata({
@@ -107,7 +107,7 @@ export default function TaxiPage() {
 
             {/* 3D Taxi Animation with Pricing */}
             <div className="space-y-6">
-              <Taxi3D />
+              <TaxiThreeD />
               <AnimatedCard className="bg-gray-50 rounded-2xl p-7 border border-gray-100">
                 <h3 className="font-display text-xl font-bold text-gray-900 mb-5">Sample Pricing</h3>
                 <div className="space-y-3">

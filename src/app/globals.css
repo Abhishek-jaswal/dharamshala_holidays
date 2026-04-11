@@ -2,11 +2,12 @@
   Google Fonts — preconnect is done in layout.tsx <head> for faster load.
   font-display:swap ensures text is visible before fonts finish loading.
 */
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=Source+Sans+3:wght@300;400;600;700&display=swap&font-display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700&family=Outfit:wght@300;400;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap&font-display=swap');
 
 :root {
-  --font-display: 'Playfair Display';
-  --font-body: 'Source Sans 3';
+  --font-display: 'Outfit';
+  --font-heading: 'Sora';
+  --font-body: 'Inter';
 }
 
 @tailwind base;
@@ -29,13 +30,32 @@
   h1,
   h2,
   h3 {
-    font-family: var(--font-display), Georgia, serif;
+    font-family: var(--font-display), var(--font-heading), sans-serif;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+  }
+
+  h1 {
+    font-size: clamp(1.875rem, 5vw, 3.75rem);
+    line-height: 1.2;
+  }
+
+  h2 {
+    font-size: clamp(1.5rem, 4vw, 2.25rem);
+    line-height: 1.3;
+  }
+
+  h3 {
+    font-size: clamp(1.25rem, 3vw, 1.875rem);
+    line-height: 1.4;
   }
 
   body {
     font-family: var(--font-body), system-ui, sans-serif;
     /* Avoid invisible text during font load */
     font-display: swap;
+    font-size: 1rem;
+    line-height: 1.6;
   }
 
   /* Reduce motion for users who prefer it */

@@ -6,7 +6,7 @@ import { Breadcrumbs } from "@/components/shared/Breadcrumbs";
 import { SectionHeading } from "@/components/shared/SectionHeading";
 import { buildMetadata } from "@/lib/metadata";
 import { WHATSAPP_URL, CALL_URL } from "@/constants/business";
-import { Scooty3D } from "@/components/animated/Scooty3D";
+import { ScootyThreeD } from "@/components/animated/ScootyThreeD";
 import { AnimatedCard, AnimatedContainer, AnimatedItem, AnimatedRevealText } from "@/components/animated/AnimatedComponents";
 
 export const metadata: Metadata = buildMetadata({
@@ -110,7 +110,7 @@ export default function ScootyRentPage() {
 
             {/* 3D Scooty Animation with Fleet */}
             <div className="space-y-6">
-              <Scooty3D />
+              <ScootyThreeD />
               <div>
                 <h3 className="font-display text-xl font-bold text-gray-900 mb-4">Available Scooties</h3>
                 <div className="space-y-3">
