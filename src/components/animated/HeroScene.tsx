@@ -1,230 +1,180 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
-import * as THREE from 'three';
-
+// Pure CSS hero background — no WebGL required
+// Renders: starfield, mountain silhouettes, animated road, moving headlights
 export function HeroScene() {
-  const mountRef = useRef<HTMLDivElement>(null);
+  return (
+    <div className="absolute inset-0 w-full h-full overflow-hidden" aria-hidden="true">
+      {/* Deep night sky gradient */}
+      <div className="absolute inset-0 bg-gradient-to-b from-[#020818] via-[#060d1f] to-[#0a1628]" />
 
-  useEffect(() => {
-    const mount = mountRef.current;
-    if (!mount) return;
+      {/* ── STARS ── */}
+      <div className="absolute inset-0">
+        {Array.from({ length: 80 }).map((_, i) => {
+          const size = Math.random() * 2.5 + 0.5;
+          const top = Math.random() * 70;
+          const left = Math.random() * 100;
+          const delay = Math.random() * 4;
+          const dur = 2 + Math.random() * 3;
+          return (
+            <span
+              key={i}
+              className="absolute rounded-full bg-white"
+              style={{
+                width: size,
+                height: size,
+                top: `${top}%`,
+                left: `${left}%`,
+                opacity: Math.random() * 0.7 + 0.2,
+                animation: `starTwinkle ${dur}s ${delay}s ease-in-out infinite`,
+              }}
+            />
+          );
+        })}
+      </div>
 
-    // Scene setup
-    const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(70, mount.clientWidth / mount.clientHeight, 0.1, 1000);
-    camera.position.set(0, 2, 8);
-    camera.lookAt(0, 0, 0);
+      {/* ── MOON ── */}
+      <div className="absolute top-16 right-20 w-14 h-14 rounded-full bg-gradient-to-br from-amber-100 to-amber-200 shadow-[0_0_40px_12px_rgba(251,191,36,0.25)]" />
 
-    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-    renderer.setSize(mount.clientWidth, mount.clientHeight);
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-    renderer.shadowMap.enabled = true;
-    renderer.shadowMap.type = THREE.PCFSoftShadowMap;
-    mount.appendChild(renderer.domElement);
+      {/* ── FAR MOUNTAINS ── */}
+      <svg
+        className="absolute bottom-0 left-0 right-0 w-full"
+        viewBox="0 0 1440 320"
+        preserveAspectRatio="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        {/* Farthest range — lightest */}
+        <path
+          d="M0,260 L80,180 L180,140 L260,170 L340,100 L420,130 L500,80 L580,120 L660,90 L740,130 L820,70 L900,110 L980,85 L1060,120 L1140,95 L1220,130 L1300,160 L1380,140 L1440,150 L1440,320 L0,320 Z"
+          fill="#1a2744"
+        />
+        {/* Mid range */}
+        <path
+          d="M0,280 L60,220 L140,170 L220,200 L300,140 L390,165 L470,110 L550,150 L640,105 L730,145 L810,100 L900,140 L990,115 L1080,150 L1160,120 L1250,155 L1340,185 L1440,200 L1440,320 L0,320 Z"
+          fill="#0f1d33"
+        />
+        {/* Near range — darkest */}
+        <path
+          d="M0,295 L70,250 L150,200 L230,230 L310,175 L400,205 L490,155 L580,185 L670,150 L760,180 L860,145 L960,175 L1050,155 L1150,185 L1250,215 L1360,245 L1440,260 L1440,320 L0,320 Z"
+          fill="#0a1628"
+        />
+      </svg>
 
-    // ── STAR FIELD ──
-    const starGeometry = new THREE.BufferGeometry();
-    const starCount = 1500;
-    const starPositions = new Float32Array(starCount * 3);
-    const starSizes = new Float32Array(starCount);
-    for (let i = 0; i < starCount; i++) {
-      starPositions[i * 3] = (Math.random() - 0.5) * 200;
-      starPositions[i * 3 + 1] = Math.random() * 60 + 5;
-      starPositions[i * 3 + 2] = (Math.random() - 0.5) * 200;
-      starSizes[i] = Math.random() * 1.5 + 0.3;
-    }
-    starGeometry.setAttribute('position', new THREE.BufferAttribute(starPositions, 3));
-    starGeometry.setAttribute('size', new THREE.BufferAttribute(starSizes, 1));
-    const starMaterial = new THREE.PointsMaterial({
-      color: 0xffffff,
-      size: 0.15,
-      sizeAttenuation: true,
-      transparent: true,
-      opacity: 0.8,
-    });
-    const stars = new THREE.Points(starGeometry, starMaterial);
-    scene.add(stars);
+      {/* ── ROAD ── */}
+      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-full" style={{ perspective: '800px' }}>
+        <div
+          className="relative mx-auto bg-[#151515]"
+          style={{
+            width: '100%',
+            height: 220,
+            transform: 'rotateX(55deg)',
+            transformOrigin: 'bottom center',
+          }}
+        >
+          {/* Road surface */}
+          <div className="absolute inset-0 bg-gradient-to-b from-[#0a0a0a] to-[#1a1a1a]" />
 
-    // ── MOUNTAIN SILHOUETTES ──
-    function makeMountain(points: [number, number][], z: number, color: number) {
-      const shape = new THREE.Shape();
-      shape.moveTo(points[0][0], points[0][1]);
-      for (let i = 1; i < points.length; i++) shape.lineTo(points[i][0], points[i][1]);
-      shape.closePath();
-      const geo = new THREE.ShapeGeometry(shape);
-      const mat = new THREE.MeshBasicMaterial({ color, side: THREE.DoubleSide });
-      const mesh = new THREE.Mesh(geo, mat);
-      mesh.position.z = z;
-      mesh.rotation.x = -Math.PI * 0.02;
-      return mesh;
-    }
+          {/* Center dashes — animated scrolling */}
+          <div className="absolute inset-x-0 flex flex-col items-center gap-8 overflow-hidden h-full"
+            style={{ animation: 'roadScroll 1.2s linear infinite' }}>
+            {Array.from({ length: 10 }).map((_, i) => (
+              <div key={i} className="w-3 h-16 bg-amber-400 rounded-full opacity-80 flex-shrink-0" />
+            ))}
+          </div>
 
-    // Far mountains (lighter)
-    scene.add(makeMountain([[-30, -3], [-18, 8], [-8, 14], [0, 10], [8, 16], [18, 8], [30, -3]], -25, 0x1a2744));
-    // Mid mountains
-    scene.add(makeMountain([[-30, -3], [-20, 5], [-10, 12], [0, 7], [10, 13], [20, 5], [30, -3]], -15, 0x0f1d33));
-    // Near mountains (darkest)
-    scene.add(makeMountain([[-30, -3], [-22, 3], [-12, 9], [-4, 5], [4, 8], [12, 10], [22, 3], [30, -3]], -8, 0x0a1628));
+          {/* Side lines */}
+          <div className="absolute top-0 bottom-0 left-[28%] w-0.5 bg-white opacity-30" />
+          <div className="absolute top-0 bottom-0 right-[28%] w-0.5 bg-white opacity-30" />
+        </div>
+      </div>
 
-    // ── ROAD ──
-    const roadGeometry = new THREE.PlaneGeometry(6, 80, 8, 80);
-    const roadMaterial = new THREE.MeshStandardMaterial({
-      color: 0x1a1a2e,
-      roughness: 0.9,
-      metalness: 0.1,
-    });
-    const road = new THREE.Mesh(roadGeometry, roadMaterial);
-    road.rotation.x = -Math.PI / 2;
-    road.position.y = -2.5;
-    road.position.z = 10;
-    road.receiveShadow = true;
-    scene.add(road);
+      {/* ── MOVING HEADLIGHTS ── */}
+      {[
+        { delay: '0s', offset: '-8%', size: 14 },
+        { delay: '1.8s', offset: '5%', size: 10 },
+        { delay: '3.2s', offset: '-3%', size: 12 },
+      ].map((v, i) => (
+        <div
+          key={i}
+          className="absolute bottom-8"
+          style={{
+            left: `calc(50% + ${v.offset})`,
+            animation: `headlightMove 4s ${v.delay} linear infinite`,
+          }}
+        >
+          {/* Left headlight */}
+          <div
+            className="absolute rounded-full bg-amber-100"
+            style={{
+              width: v.size,
+              height: v.size,
+              left: -v.size * 1.5,
+              boxShadow: `0 0 ${v.size * 2}px ${v.size}px rgba(251,191,36,0.6)`,
+            }}
+          />
+          {/* Right headlight */}
+          <div
+            className="absolute rounded-full bg-amber-100"
+            style={{
+              width: v.size,
+              height: v.size,
+              left: v.size * 0.5,
+              boxShadow: `0 0 ${v.size * 2}px ${v.size}px rgba(251,191,36,0.6)`,
+            }}
+          />
+          {/* Beam */}
+          <div
+            className="absolute bottom-0"
+            style={{
+              width: v.size * 6,
+              height: v.size * 10,
+              left: -v.size * 2,
+              background: 'linear-gradient(to bottom, rgba(251,191,36,0.18) 0%, transparent 100%)',
+              clipPath: 'polygon(30% 0%, 70% 0%, 100% 100%, 0% 100%)',
+            }}
+          />
+        </div>
+      ))}
 
-    // Road center dashes
-    const dashGeometry = new THREE.PlaneGeometry(0.15, 3);
-    const dashMaterial = new THREE.MeshBasicMaterial({ color: 0xffd700 });
-    for (let i = 0; i < 18; i++) {
-      const dash = new THREE.Mesh(dashGeometry, dashMaterial);
-      dash.rotation.x = -Math.PI / 2;
-      dash.position.set(0, -2.49, -35 + i * 5);
-      scene.add(dash);
-    }
+      {/* ── FLOATING PARTICLES / FIREFLIES ── */}
+      {Array.from({ length: 20 }).map((_, i) => (
+        <div
+          key={i}
+          className="absolute w-1 h-1 rounded-full bg-orange-400 opacity-60"
+          style={{
+            left: `${10 + Math.random() * 80}%`,
+            bottom: `${10 + Math.random() * 50}%`,
+            animation: `floatUp ${4 + Math.random() * 5}s ${Math.random() * 5}s ease-in-out infinite`,
+          }}
+        />
+      ))}
 
-    // Road side lines
-    const sideLineMat = new THREE.MeshBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0.6 });
-    for (let side of [-2.9, 2.9]) {
-      const lineGeo = new THREE.PlaneGeometry(0.08, 80);
-      const line = new THREE.Mesh(lineGeo, sideLineMat);
-      line.rotation.x = -Math.PI / 2;
-      line.position.set(side, -2.48, 10);
-      scene.add(line);
-    }
+      {/* Orange city glow from below */}
+      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-orange-950/40 to-transparent" />
 
-    // ── MOVING HEADLIGHTS (glowing orbs on road) ──
-    const headlightGroup = new THREE.Group();
-    scene.add(headlightGroup);
-
-    function createHeadlightPair(zStart: number) {
-      const group = new THREE.Group();
-      const lightGeo = new THREE.SphereGeometry(0.12, 8, 8);
-      const lightMat = new THREE.MeshBasicMaterial({ color: 0xfff5c3 });
-      const leftLight = new THREE.Mesh(lightGeo, lightMat);
-      const rightLight = new THREE.Mesh(lightGeo, lightMat);
-      leftLight.position.set(-0.8, -2.3, 0);
-      rightLight.position.set(0.8, -2.3, 0);
-      group.add(leftLight, rightLight);
-
-      const coneGeo = new THREE.ConeGeometry(1.2, 6, 8, 1, true);
-      const coneMat = new THREE.MeshBasicMaterial({ color: 0xfff5c3, transparent: true, opacity: 0.07, side: THREE.DoubleSide });
-      const cone = new THREE.Mesh(coneGeo, coneMat);
-      cone.rotation.x = Math.PI / 2;
-      cone.position.set(0, -2.2, -3);
-      group.add(cone);
-
-      group.position.z = zStart;
-      return group;
-    }
-
-    const vehicles = [
-      createHeadlightPair(-50),
-      createHeadlightPair(-70),
-      createHeadlightPair(-90),
-    ];
-    vehicles.forEach(v => headlightGroup.add(v));
-
-    // ── FLOATING PARTICLES (dust/fireflies) ──
-    const particleGeo = new THREE.BufferGeometry();
-    const pCount = 120;
-    const pPos = new Float32Array(pCount * 3);
-    const pVel = new Float32Array(pCount);
-    for (let i = 0; i < pCount; i++) {
-      pPos[i * 3] = (Math.random() - 0.5) * 20;
-      pPos[i * 3 + 1] = (Math.random() - 0.5) * 8;
-      pPos[i * 3 + 2] = (Math.random() - 0.5) * 20;
-      pVel[i] = Math.random() * 0.02 + 0.005;
-    }
-    particleGeo.setAttribute('position', new THREE.BufferAttribute(pPos, 3));
-    const particleMat = new THREE.PointsMaterial({
-      color: 0xffa500,
-      size: 0.06,
-      transparent: true,
-      opacity: 0.7,
-      sizeAttenuation: true,
-    });
-    const particles = new THREE.Points(particleGeo, particleMat);
-    scene.add(particles);
-
-    // ── LIGHTS ──
-    scene.add(new THREE.AmbientLight(0x223366, 0.8));
-    const moonLight = new THREE.DirectionalLight(0x8899cc, 0.5);
-    moonLight.position.set(-10, 20, -5);
-    scene.add(moonLight);
-
-    // Orange glow from below (road/city)
-    const glow = new THREE.PointLight(0xff6600, 1.5, 30);
-    glow.position.set(0, -1, 0);
-    scene.add(glow);
-
-    // ── RESIZE ──
-    const handleResize = () => {
-      if (!mount) return;
-      camera.aspect = mount.clientWidth / mount.clientHeight;
-      camera.updateProjectionMatrix();
-      renderer.setSize(mount.clientWidth, mount.clientHeight);
-    };
-    window.addEventListener('resize', handleResize);
-
-    // ── ANIMATION LOOP ──
-    let animId: number;
-    const clock = new THREE.Clock();
-
-    function animate() {
-      animId = requestAnimationFrame(animate);
-      const t = clock.getElapsedTime();
-
-      // Subtle camera sway
-      camera.position.x = Math.sin(t * 0.15) * 0.4;
-      camera.position.y = 2 + Math.sin(t * 0.2) * 0.1;
-
-      // Stars twinkle
-      starMaterial.opacity = 0.6 + Math.sin(t * 0.8) * 0.2;
-
-      // Move vehicles along road (approaching from far, loop)
-      vehicles.forEach((v, i) => {
-        v.position.z += 0.3 + i * 0.05;
-        if (v.position.z > 12) v.position.z = -90;
-      });
-
-      // Rotate particles slowly
-      particles.rotation.y += 0.0008;
-      const pPositions = particleGeo.attributes.position.array as Float32Array;
-      for (let i = 0; i < pCount; i++) {
-        pPositions[i * 3 + 1] += pVel[i] * 0.15;
-        if (pPositions[i * 3 + 1] > 6) pPositions[i * 3 + 1] = -4;
-      }
-      particleGeo.attributes.position.needsUpdate = true;
-
-      // Glow pulse
-      glow.intensity = 1.2 + Math.sin(t * 1.5) * 0.3;
-
-      // Road dashes move (create illusion of movement)
-      road.position.z = 10 + (t * 2) % 5;
-
-      renderer.render(scene, camera);
-    }
-
-    animate();
-
-    return () => {
-      cancelAnimationFrame(animId);
-      window.removeEventListener('resize', handleResize);
-      renderer.dispose();
-      if (mount.contains(renderer.domElement)) {
-        mount.removeChild(renderer.domElement);
-      }
-    };
-  }, []);
-
-  return <div ref={mountRef} className="absolute inset-0 w-full h-full" />;
+      {/* CSS keyframes injected inline */}
+      <style>{`
+        @keyframes starTwinkle {
+          0%, 100% { opacity: 0.2; transform: scale(1); }
+          50%       { opacity: 0.9; transform: scale(1.4); }
+        }
+        @keyframes roadScroll {
+          from { transform: translateY(0); }
+          to   { transform: translateY(96px); }
+        }
+        @keyframes headlightMove {
+          0%   { transform: translateY(0)   scale(1.5); opacity: 0; }
+          10%  { opacity: 1; }
+          90%  { opacity: 1; }
+          100% { transform: translateY(-420px) scale(0.2); opacity: 0; }
+        }
+        @keyframes floatUp {
+          0%   { transform: translateY(0) translateX(0); opacity: 0; }
+          20%  { opacity: 0.7; }
+          80%  { opacity: 0.4; }
+          100% { transform: translateY(-120px) translateX(${Math.random() > 0.5 ? '' : '-'}20px); opacity: 0; }
+        }
+      `}</style>
+    </div>
+  );
 }

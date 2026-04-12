@@ -1,209 +1,118 @@
-'use client';
-
-import { useEffect, useRef } from 'react';
-import * as THREE from 'three';
-
+// Pure CSS/SVG taxi illustration — no WebGL
 export function TaxiThreeD() {
-  const mountRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const mount = mountRef.current;
-    if (!mount) return;
-
-    const w = mount.clientWidth;
-    const h = mount.clientHeight;
-
-    const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(45, w / h, 0.1, 100);
-    camera.position.set(3, 2.5, 5);
-    camera.lookAt(0, 0.3, 0);
-
-    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-    renderer.setSize(w, h);
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-    renderer.setClearColor(0x000000, 0);
-    renderer.shadowMap.enabled = true;
-    mount.appendChild(renderer.domElement);
-
-    // Materials
-    const yellowMat = new THREE.MeshStandardMaterial({ color: 0xfbbf24, metalness: 0.4, roughness: 0.4 });
-    const darkMat = new THREE.MeshStandardMaterial({ color: 0x111827, metalness: 0.3, roughness: 0.6 });
-    const glassMat = new THREE.MeshStandardMaterial({ color: 0x93c5fd, metalness: 0.1, roughness: 0.05, transparent: true, opacity: 0.55 });
-    const chromeMat = new THREE.MeshStandardMaterial({ color: 0xe5e7eb, metalness: 0.95, roughness: 0.05 });
-    const lightMat = new THREE.MeshStandardMaterial({ color: 0xfef9c3, emissive: 0xfbbf24, emissiveIntensity: 1.0 });
-    const redMat = new THREE.MeshStandardMaterial({ color: 0xef4444, emissive: 0xdc2626, emissiveIntensity: 0.5 });
-
-    const group = new THREE.Group();
-
-    // ── CAR BODY (lower) ──
-    const bodyGeo = new THREE.BoxGeometry(2.2, 0.6, 1.0);
-    const bodyBevel = new THREE.Mesh(bodyGeo, yellowMat);
-    bodyBevel.position.y = 0.45;
-    group.add(bodyBevel);
-
-    // ── CAR CABIN (upper) ──
-    const cabinGeo = new THREE.BoxGeometry(1.4, 0.55, 0.9);
-    const cabin = new THREE.Mesh(cabinGeo, yellowMat);
-    cabin.position.set(-0.15, 0.98, 0);
-    group.add(cabin);
-
-    // Front windshield
-    const windGeo = new THREE.PlaneGeometry(0.5, 0.45);
-    const windFront = new THREE.Mesh(windGeo, glassMat);
-    windFront.rotation.y = -Math.PI / 2;
-    windFront.rotation.z = 0.18;
-    windFront.position.set(0.6, 1.0, 0);
-    group.add(windFront);
-
-    // Rear windshield
-    const windRear = new THREE.Mesh(windGeo, glassMat);
-    windRear.rotation.y = Math.PI / 2;
-    windRear.rotation.z = -0.18;
-    windRear.position.set(-0.9, 1.0, 0);
-    group.add(windRear);
-
-    // Side windows
-    const sideWinGeo = new THREE.PlaneGeometry(1.1, 0.35);
-    for (let side of [0.46, -0.46]) {
-      const win = new THREE.Mesh(sideWinGeo, glassMat);
-      win.rotation.x = side > 0 ? 0 : Math.PI;
-      win.position.set(-0.15, 1.05, side);
-      group.add(win);
-    }
-
-    // ── WHEELS ──
-    function makeWheel(x: number, z: number) {
-      const wg = new THREE.Group();
-      const tireGeo = new THREE.CylinderGeometry(0.28, 0.28, 0.2, 20);
-      const tire = new THREE.Mesh(tireGeo, darkMat);
-      tire.rotation.z = Math.PI / 2;
-      wg.add(tire);
-      const rimGeo = new THREE.CylinderGeometry(0.16, 0.16, 0.22, 12);
-      const rim = new THREE.Mesh(rimGeo, chromeMat);
-      rim.rotation.z = Math.PI / 2;
-      wg.add(rim);
-      for (let i = 0; i < 5; i++) {
-        const sg = new THREE.CylinderGeometry(0.025, 0.025, 0.23, 6);
-        const spoke = new THREE.Mesh(sg, chromeMat);
-        spoke.rotation.z = Math.PI / 2;
-        spoke.position.y = Math.cos((i / 5) * Math.PI * 2) * 0.1;
-        spoke.position.z = Math.sin((i / 5) * Math.PI * 2) * 0.1;
-        wg.add(spoke);
-      }
-      wg.position.set(x, 0.28, z);
-      return wg;
-    }
-
-    const wheels = [
-      makeWheel(0.75, 0.55),
-      makeWheel(0.75, -0.55),
-      makeWheel(-0.75, 0.55),
-      makeWheel(-0.75, -0.55),
-    ];
-    wheels.forEach(w => group.add(w));
-
-    // ── HEADLIGHTS & TAIL LIGHTS ──
-    const hGeo = new THREE.SphereGeometry(0.08, 8, 8);
-    for (let z of [0.3, -0.3]) {
-      const h = new THREE.Mesh(hGeo, lightMat);
-      h.position.set(1.1, 0.5, z);
-      group.add(h);
-      const t = new THREE.Mesh(hGeo, redMat);
-      t.position.set(-1.1, 0.5, z);
-      group.add(t);
-    }
-
-    // ── TAXI SIGN on roof ──
-    const signGeo = new THREE.BoxGeometry(0.4, 0.15, 0.25);
-    const signMat = new THREE.MeshStandardMaterial({ color: 0xfef08a, emissive: 0xfbbf24, emissiveIntensity: 0.6 });
-    const taxiSign = new THREE.Mesh(signGeo, signMat);
-    taxiSign.position.set(0, 1.3, 0);
-    group.add(taxiSign);
-
-    // ── BUMPERS ──
-    const bumperGeo = new THREE.BoxGeometry(0.12, 0.15, 1.1);
-    const frontBumper = new THREE.Mesh(bumperGeo, chromeMat);
-    frontBumper.position.set(1.16, 0.28, 0);
-    group.add(frontBumper);
-    const rearBumper = new THREE.Mesh(bumperGeo, chromeMat);
-    rearBumper.position.set(-1.16, 0.28, 0);
-    group.add(rearBumper);
-
-    // Ground shadow
-    const shadowGeo = new THREE.CircleGeometry(1.4, 32);
-    const shadowMat = new THREE.MeshBasicMaterial({ color: 0x000000, transparent: true, opacity: 0.15 });
-    const shadowMesh = new THREE.Mesh(shadowGeo, shadowMat);
-    shadowMesh.rotation.x = -Math.PI / 2;
-    shadowMesh.position.y = -0.01;
-    group.add(shadowMesh);
-
-    scene.add(group);
-
-    // Road lines
-    const lineGeo = new THREE.PlaneGeometry(0.08, 0.8);
-    const lineMat = new THREE.MeshBasicMaterial({ color: 0xfbbf24, transparent: true, opacity: 0.4 });
-    for (let i = -3; i <= 3; i++) {
-      const line = new THREE.Mesh(lineGeo, lineMat);
-      line.rotation.x = -Math.PI / 2;
-      line.position.set(i * 1.4, 0, 0);
-      scene.add(line);
-    }
-
-    // Lights
-    scene.add(new THREE.AmbientLight(0xffffff, 0.7));
-    const key = new THREE.DirectionalLight(0xfff7ed, 1.5);
-    key.position.set(5, 10, 5);
-    key.castShadow = true;
-    scene.add(key);
-    const fill = new THREE.DirectionalLight(0xfde68a, 0.4);
-    fill.position.set(-5, 3, -3);
-    scene.add(fill);
-
-    // Glow light from headlights
-    scene.add(new THREE.PointLight(0xfef08a, 1.2, 5, 2));
-
-    const handleResize = () => {
-      if (!mount) return;
-      camera.aspect = mount.clientWidth / mount.clientHeight;
-      camera.updateProjectionMatrix();
-      renderer.setSize(mount.clientWidth, mount.clientHeight);
-    };
-    window.addEventListener('resize', handleResize);
-
-    let id: number;
-    const clock = new THREE.Clock();
-
-    function animate() {
-      id = requestAnimationFrame(animate);
-      const t = clock.getElapsedTime();
-
-      group.rotation.y = Math.sin(t * 0.4) * 0.5;
-      group.position.y = Math.sin(t * 1.0) * 0.04;
-
-      // Spin wheels slowly
-      wheels.forEach(w => { w.children[0].rotation.x += 0.04; });
-
-      // Taxi sign pulse
-      (taxiSign.material as THREE.MeshStandardMaterial).emissiveIntensity = 0.4 + Math.sin(t * 2) * 0.3;
-
-      renderer.render(scene, camera);
-    }
-    animate();
-
-    return () => {
-      cancelAnimationFrame(id);
-      window.removeEventListener('resize', handleResize);
-      renderer.dispose();
-      if (mount.contains(renderer.domElement)) mount.removeChild(renderer.domElement);
-    };
-  }, []);
-
   return (
-    <div className="relative w-full rounded-3xl overflow-hidden bg-gradient-to-br from-amber-950 to-slate-900" style={{ height: 280 }}>
-      <div ref={mountRef} className="absolute inset-0 w-full h-full" />
-      <div className="absolute bottom-4 left-0 right-0 text-center text-amber-300 text-xs font-medium opacity-70">
+    <div className="relative w-full rounded-3xl overflow-hidden bg-gradient-to-br from-amber-950 to-slate-900 flex items-center justify-center" style={{ height: 280 }}>
+      {/* Background glow */}
+      <div className="absolute inset-0 flex items-center justify-center">
+        <div className="w-56 h-40 rounded-full bg-amber-500/10 blur-3xl" />
+      </div>
+
+      {/* Road */}
+      <div className="absolute bottom-0 left-0 right-0 h-14 overflow-hidden">
+        <div className="absolute bottom-0 left-0 right-0 h-10 bg-slate-800/80" />
+        {/* Moving dashes */}
+        <div className="absolute bottom-3 left-0 right-0 flex justify-center gap-6"
+          style={{ animation: 'roadMove 1s linear infinite' }}>
+          {Array.from({ length: 14 }).map((_, i) => (
+            <div key={i} className="w-10 h-1.5 bg-amber-400/50 rounded-full flex-shrink-0" />
+          ))}
+        </div>
+        {/* Side lines */}
+        <div className="absolute bottom-1 left-0 right-0 h-0.5 bg-white/20" />
+        <div className="absolute bottom-9 left-0 right-0 h-0.5 bg-white/10" />
+      </div>
+
+      {/* SVG Taxi — 3/4 front view */}
+      <div style={{ animation: 'taxiBounce 3s ease-in-out infinite' }}>
+        <svg width="220" height="160" viewBox="0 0 220 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+          {/* Shadow */}
+          <ellipse cx="110" cy="148" rx="80" ry="8" fill="rgba(0,0,0,0.35)"/>
+
+          {/* Car body lower */}
+          <rect x="20" y="98" width="180" height="46" rx="8" fill="#d97706"/>
+          <rect x="20" y="98" width="180" height="20" rx="4" fill="#b45309"/>
+
+          {/* Wheel arches */}
+          <path d="M30 100 Q30 88 52 88 Q72 88 72 100" fill="#92400e"/>
+          <path d="M148 100 Q148 88 168 88 Q190 88 190 100" fill="#92400e"/>
+
+          {/* Car roof / cabin */}
+          <path d="M55 60 Q65 38 90 35 L140 35 Q165 38 165 60 L170 98 L50 98 Z" fill="#fbbf24"/>
+          <path d="M55 60 Q65 38 90 35 L140 35 Q165 38 165 60" fill="#f59e0b"/>
+
+          {/* Windshield */}
+          <path d="M65 60 Q72 42 92 40 L138 40 Q158 42 158 60 L150 95 L70 95 Z" fill="#93c5fd" opacity="0.7"/>
+          <path d="M65 60 Q72 42 92 40 L138 40 Q158 42 158 60" stroke="#bfdbfe" strokeWidth="1.5" fill="none"/>
+          {/* Windshield glare */}
+          <path d="M80 48 Q88 43 100 43 L95 60 Q85 58 78 55 Z" fill="white" opacity="0.25"/>
+
+          {/* Side windows */}
+          <rect x="22" y="68" width="35" height="26" rx="4" fill="#93c5fd" opacity="0.5"/>
+          <rect x="163" y="68" width="35" height="26" rx="4" fill="#93c5fd" opacity="0.5"/>
+
+          {/* Door lines */}
+          <line x1="110" y1="58" x2="110" y2="98" stroke="#92400e" strokeWidth="1.5"/>
+          <line x1="62" y1="98" x2="62" y2="65" stroke="#92400e" strokeWidth="1" opacity="0.5"/>
+          <line x1="158" y1="98" x2="158" y2="65" stroke="#92400e" strokeWidth="1" opacity="0.5"/>
+
+          {/* Door handles */}
+          <rect x="78" y="82" width="16" height="4" rx="2" fill="#92400e"/>
+          <rect x="126" y="82" width="16" height="4" rx="2" fill="#92400e"/>
+
+          {/* TAXI sign on roof */}
+          <rect x="80" y="28" width="60" height="16" rx="4" fill="#fef08a"/>
+          <rect x="82" y="30" width="56" height="12" rx="3" fill="#fbbf24"/>
+          <text x="110" y="40" textAnchor="middle" fontSize="8" fontWeight="bold" fill="#78350f" fontFamily="Arial">TAXI</text>
+          {/* Taxi sign glow */}
+          <rect x="80" y="28" width="60" height="16" rx="4" fill="rgba(251,191,36,0.3)" style={{ filter: 'blur(4px)' }}/>
+
+          {/* Front headlights */}
+          <rect x="24" y="106" width="22" height="12" rx="3" fill="#fef9c3"/>
+          <rect x="24" y="106" width="22" height="12" rx="3" fill="rgba(251,191,36,0.5)" style={{ filter: 'blur(3px)' }}/>
+          <rect x="174" y="106" width="22" height="12" rx="3" fill="#fef9c3"/>
+          <rect x="174" y="106" width="22" height="12" rx="3" fill="rgba(251,191,36,0.5)" style={{ filter: 'blur(3px)' }}/>
+
+          {/* Grille */}
+          <rect x="55" y="126" width="110" height="14" rx="4" fill="#78350f"/>
+          {Array.from({ length: 5 }).map((_, i) => (
+            <rect key={i} x={60 + i * 20} y="128" width="12" height="10" rx="2" fill="#92400e"/>
+          ))}
+
+          {/* Front bumper chrome */}
+          <rect x="22" y="140" width="176" height="6" rx="3" fill="#d1d5db"/>
+
+          {/* Wheels — front view style */}
+          {/* Left wheel */}
+          <ellipse cx="52" cy="140" rx="26" ry="14" fill="#1e293b"/>
+          <ellipse cx="52" cy="140" rx="20" ry="10" fill="#374151"/>
+          <ellipse cx="52" cy="140" rx="12" ry="7" fill="#4b5563"/>
+          <ellipse cx="52" cy="140" rx="5" ry="3" fill="#9ca3af"/>
+          {/* Right wheel */}
+          <ellipse cx="168" cy="140" rx="26" ry="14" fill="#1e293b"/>
+          <ellipse cx="168" cy="140" rx="20" ry="10" fill="#374151"/>
+          <ellipse cx="168" cy="140" rx="12" ry="7" fill="#4b5563"/>
+          <ellipse cx="168" cy="140" rx="5" ry="3" fill="#9ca3af"/>
+
+          {/* Headlight beams */}
+          <path d="M15 118 L0 90 L30 100 Z" fill="rgba(251,191,36,0.15)"/>
+          <path d="M205 118 L220 90 L190 100 Z" fill="rgba(251,191,36,0.15)"/>
+        </svg>
+      </div>
+
+      <div className="absolute bottom-4 left-0 right-0 text-center text-amber-300 text-xs font-semibold opacity-80">
         🚕 Taxi Service — Starting ₹300
       </div>
+
+      <style>{`
+        @keyframes taxiBounce {
+          0%, 100% { transform: translateY(0) rotate(-0.5deg); }
+          50%       { transform: translateY(-7px) rotate(0.5deg); }
+        }
+        @keyframes roadMove {
+          from { transform: translateX(-80px); }
+          to   { transform: translateX(0); }
+        }
+      `}</style>
     </div>
   );
 }
