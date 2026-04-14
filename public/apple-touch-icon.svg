@@ -1,7 +1,0 @@
-<svg width="180" height="180" viewBox="0 0 180 180" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <rect width="180" height="180" rx="40" fill="#f0fdf4"/>
-  <circle cx="90" cy="90" r="85" stroke="#16a34a" stroke-width="3"/>
-  <path d="M 45 105 L 90 35 L 135 105" stroke="#16a34a" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-  <polygon points="65,105 60,90 55,85 55,80 60,80 65,70 70,80 75,80 75,85 70,90" fill="#22c55e"/>
-  <polygon points="115,105 110,90 105,85 105,80 110,80 115,70 120,80 125,80 125,85 120,90" fill="#22c55e"/>
-</svg>

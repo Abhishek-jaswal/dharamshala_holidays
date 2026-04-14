@@ -1,204 +1,36 @@
-# 🏔️ SKD Holidays — Website
+This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-A fast, SEO-optimised travel & taxi booking website for **SKD Holidays**, built with **Next.js 14**, **Tailwind CSS**, and **TypeScript**.
+## Getting Started
 
----
-
-## 📞 Business Contact
-
-| Detail | Value |
-|--------|-------|
-| **Business Name** | SKD Holidays |
-| **Phone / Call** | +91 76500 14729 |
-| **WhatsApp** | +91 76500 14729 |
-| **WhatsApp Link** | Opens with pre-filled booking message |
-| **Address** | Near Bus Stand, McLeod Ganj, Dharamshala, HP 176219 |
-
-> ✏️ All contact details are centralised in one file:  
-> `src/constants/business.ts` — edit once, updates everywhere.
-
----
-
-## 🚀 Getting Started
-
-### Prerequisites
-- Node.js 18+ and npm
-
-### Install & Run
+First, run the development server:
 
 ```bash
-# Install dependencies
-npm install
-
-# Start development server
 npm run dev
-# → http://localhost:3000
-
-# Build for production
-npm run build
-
-# Start production server
-npm start
+# or
+yarn dev
+# or
+pnpm dev
+# or
+bun dev
 ```
 
----
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-## 📁 Project Structure
+You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-```
-src/
-├── app/                        # Next.js App Router pages
-│   ├── layout.tsx              # Root layout (Navbar, Footer, floating buttons)
-│   ├── page.tsx                # Homepage
-│   ├── about/page.tsx
-│   ├── contact/page.tsx
-│   ├── destinations/page.tsx
-│   ├── faq/page.tsx
-│   ├── gallery/page.tsx
-│   ├── pricing/page.tsx
-│   ├── services/
-│   │   ├── page.tsx            # Services overview
-│   │   ├── taxi/page.tsx
-│   │   ├── scooty-on-rent/page.tsx
-│   │   ├── bike-on-rent/page.tsx
-│   │   └── airport-pickup/page.tsx
-│   ├── globals.css             # Global styles & Tailwind
-│   ├── robots.ts               # SEO robots config
-│   └── sitemap.ts              # Auto-generated sitemap
-│
-├── components/
-│   ├── layout/
-│   │   ├── Navbar.tsx          # Sticky responsive navbar with dropdown
-│   │   └── Footer.tsx          # Full footer with links & contact
-│   ├── sections/
-│   │   ├── CTASection.tsx      # Call-to-action section
-│   │   ├── ContactForm.tsx     # Contact form
-│   │   ├── FAQSection.tsx      # Accordion FAQ
-│   │   ├── PricingCard.tsx     # Pricing display card
-│   │   ├── ServiceCard.tsx     # Service listing card
-│   │   └── TestimonialCard.tsx # Customer review card
-│   └── shared/
-│       ├── Breadcrumbs.tsx     # Page breadcrumbs
-│       ├── CallFloatingButton.tsx    # 📞 Sticky call button (bottom-right)
-│       ├── SectionHeading.tsx        # Reusable section title
-│       └── WhatsAppFloatingButton.tsx # 💬 Sticky WhatsApp button (above call)
-│
-├── constants/
-│   └── business.ts             # ⭐ SINGLE SOURCE OF TRUTH for all business data
-│
-└── lib/
-    ├── metadata.ts             # Shared SEO metadata helpers
-    ├── schema.ts               # JSON-LD structured data (Google rich results)
-    └── utils.ts                # Tailwind class merger utility
-```
+This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
----
+## Learn More
 
-## ⭐ Key File: `src/constants/business.ts`
+To learn more about Next.js, take a look at the following resources:
 
-This is the **only file you need to edit** to update all contact info, names, and links across the entire website.
+- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
+- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-```ts
-export const BUSINESS = {
-  name: "SKD Holidays",
-  phone: "+91 76500 14729",
-  phoneRaw: "+917650014729",
-  whatsapp: "917650014729",
-  whatsappMessage: "Hi! I found you on SKD Holidays website...",
-  email: "info@skdholidays.com",
-  address: "Near Bus Stand, McLeod Ganj, Dharamshala...",
-  // ... social links, business hours, maps
-};
-```
+You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
 
----
+## Deploy on Vercel
 
-## 📱 WhatsApp & Call Integration
+The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
-### WhatsApp Button
-- Floating button (bottom-right, above call button)
-- Opens `https://wa.me/917650014729?text=...` with a **pre-filled message**
-- Message: *"Hi! I found you on SKD Holidays website. I want to book a taxi/scooty. Please share details."*
-- Pulse animation to draw attention
-
-### Call Button
-- Floating button (bottom-right)
-- Opens `tel:+917650014729` — triggers native phone dialler on mobile
-- Works on both Android and iOS
-
-To change the WhatsApp pre-filled message, edit `whatsappMessage` in `src/constants/business.ts`.
-
----
-
-## ⚡ Performance Optimizations
-
-| Optimization | Details |
-|---|---|
-| **Font preconnect** | `<link rel="preconnect">` to Google Fonts in `<head>` for faster font load |
-| **font-display: swap** | Text visible immediately; web font swaps in when ready (no invisible text) |
-| **Image formats** | AVIF + WebP served automatically by Next.js Image component |
-| **Aggressive caching** | Static assets cached 1 year; images cached 30 days |
-| **Tree-shaking** | `optimizePackageImports: ["lucide-react"]` reduces JS bundle size |
-| **HTTP headers** | Security + cache headers added via `next.config.js` |
-| **Reduced motion** | `prefers-reduced-motion` CSS query respects user preferences |
-| **App Router** | Next.js 14 App Router enables React Server Components (zero JS for static pages) |
-
----
-
-## 🗺️ Pages
-
-| Route | Description |
-|-------|-------------|
-| `/` | Homepage — hero, services, testimonials, FAQ |
-| `/about` | About the business |
-| `/services` | All services overview |
-| `/services/taxi` | Taxi service details & pricing |
-| `/services/scooty-on-rent` | Scooty rental details |
-| `/services/bike-on-rent` | Bike rental details |
-| `/services/airport-pickup` | Airport pickup/drop service |
-| `/destinations` | Popular destinations with prices |
-| `/pricing` | Full pricing table |
-| `/gallery` | Photo gallery |
-| `/faq` | Frequently asked questions |
-| `/contact` | Contact form + map |
-
----
-
-## 🔍 SEO Features
-
-- ✅ Auto-generated `sitemap.xml` via `src/app/sitemap.ts`
-- ✅ `robots.txt` via `src/app/robots.ts`
-- ✅ JSON-LD structured data (Local Business schema) for Google rich results
-- ✅ Per-page `metadata` with title, description, and keywords
-- ✅ `metadataBase` for correct canonical URLs
-- ✅ Open Graph ready
-
----
-
-## 🛠️ Customisation Checklist
-
-- [ ] Update `src/constants/business.ts` with your real domain URL
-- [ ] Add Google Search Console verification code in `src/app/layout.tsx`
-- [ ] Replace placeholder Google Maps embed URL with your real location
-- [ ] Add real Instagram / Facebook links in `business.ts`
-- [ ] Add real photos to `/public/images/`
-- [ ] Update email address in `business.ts`
-
----
-
-## 🧰 Tech Stack
-
-| Technology | Version | Purpose |
-|---|---|---|
-| Next.js | 14.2 | React framework, App Router, SSR/SSG |
-| React | 18 | UI library |
-| TypeScript | 5 | Type safety |
-| Tailwind CSS | 3.3 | Utility-first styling |
-| Lucide React | 0.344 | Icons |
-| Radix UI | latest | Accessible headless UI primitives |
-
----
-
-## 📄 License
-
-Private — all rights reserved by SKD Holidays.
+Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
