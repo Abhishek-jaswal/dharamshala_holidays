@@ -1,0 +1,35 @@
+{
+  "name":             "SKD Holidays – Dharamshala",
+  "short_name":       "SKD Holidays",
+  "description":      "Taxi, Bike Rental & Tour Packages in Dharamshala, Himachal Pradesh",
+  "start_url":        "/",
+  "display":          "standalone",
+  "orientation":      "portrait",
+  "background_color": "#052e16",
+  "theme_color":      "#16a34a",
+  "categories":       ["travel", "transportation", "lifestyle"],
+  "lang":             "en-IN",
+  "icons": [
+    { "src": "/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "maskable any" },
+    { "src": "/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable any" }
+  ],
+  "screenshots": [
+    { "src": "/screenshot-mobile.jpg", "sizes": "375x812", "type": "image/jpeg", "form_factor": "narrow" }
+  ],
+  "shortcuts": [
+    {
+      "name":       "Call SKD Holidays",
+      "short_name": "Call Now",
+      "description":"Dial SKD Holidays directly",
+      "url":        "/contact",
+      "icons":      [{ "src": "/icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name":       "Tour Packages",
+      "short_name": "Packages",
+      "description":"Browse our tour packages",
+      "url":        "/packages",
+      "icons":      [{ "src": "/icon-192.png", "sizes": "192x192" }]
+    }
+  ]
+}
