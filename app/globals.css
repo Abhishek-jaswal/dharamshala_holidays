@@ -1,23 +1,23 @@
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;1,400;1,600&family=DM+Sans:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap');
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
 
-:root {
-  --sky: #0ea5e9;
-  --mountain: #1e3a5f;
-  --forest: #064e3b;
-  --snow: #f8fafc;
-  --gold: #f59e0b;
-  --sunset: #f97316;
-  --deep: #0f172a;
-  --glass: rgba(255, 255, 255, 0.07);
-  --glass-border: rgba(255, 255, 255, 0.12);
+@import "tailwindcss";
+
+@theme {
+  --color-brand-sky: #0ea5e9;
+  --color-brand-gold: #f59e0b;
+  --color-deep: #0a0f1a;
+  --font-display: "Playfair Display", serif;
+  --font-sans: "DM Sans", sans-serif;
 }
 
-* { box-sizing: border-box; }
-html { scroll-behavior: smooth; }
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
 
 body {
   background: #0a0f1a;
@@ -27,8 +27,13 @@ body {
   overflow-x: hidden;
 }
 
-.font-display { font-family: 'Playfair Display', serif; }
-.font-mono-custom { font-family: 'Space Mono', monospace; }
+.font-display {
+  font-family: 'Playfair Display', serif;
+}
+
+.font-mono-custom {
+  font-family: 'Space Mono', monospace;
+}
 
 .glass {
   background: rgba(255, 255, 255, 0.07);
@@ -58,40 +63,78 @@ body {
   background-clip: text;
 }
 
-::-webkit-scrollbar { width: 6px; }
-::-webkit-scrollbar-track { background: #0a0f1a; }
-::-webkit-scrollbar-thumb { background: #1e3a5f; border-radius: 3px; }
-::-webkit-scrollbar-thumb:hover { background: #0ea5e9; }
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0a0f1a;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #1e3a5f;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #0ea5e9;
+}
 
 .destination-card {
   transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
-.destination-card:hover { transform: translateY(-8px) scale(1.01); }
 
-.price-tag { font-family: 'Space Mono', monospace; }
+.destination-card:hover {
+  transform: translateY(-8px) scale(1.01);
+}
+
+.price-tag {
+  font-family: 'Space Mono', monospace;
+}
 
 .btn-glow {
   box-shadow: 0 0 20px rgba(14, 165, 233, 0.3);
   transition: box-shadow 0.3s ease;
 }
-.btn-glow:hover { box-shadow: 0 0 40px rgba(14, 165, 233, 0.5); }
+
+.btn-glow:hover {
+  box-shadow: 0 0 40px rgba(14, 165, 233, 0.5);
+}
 
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
-.page-enter { animation: fadeIn 0.6s cubic-bezier(0.16, 1, 0.3, 1); }
+
+.page-enter {
+  animation: fadeIn 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
 
 @keyframes shimmer {
-  0% { background-position: -200% 0; }
-  100% { background-position: 200% 0; }
+  0% {
+    background-position: -200% 0;
+  }
+
+  100% {
+    background-position: 200% 0;
+  }
 }
+
 .shimmer {
-  background: linear-gradient(90deg, transparent 33%, rgba(255,255,255,0.05) 50%, transparent 66%);
+  background: linear-gradient(90deg, transparent 33%, rgba(255, 255, 255, 0.05) 50%, transparent 66%);
   background-size: 300% 100%;
   animation: shimmer 1.5s infinite;
 }
 
 @layer utilities {
-  .text-balance { text-wrap: balance; }
+  .text-balance {
+    text-wrap: balance;
+  }
 }
