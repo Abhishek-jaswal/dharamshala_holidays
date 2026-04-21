@@ -1,0 +1,109 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;1,400;1,600&family=DM+Sans:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --primary:        #16a34a;
+  --primary-dark:   #15803d;
+  --primary-light:  #4ade80;
+  --accent:         #052e16;
+  --text:           #1a2e1a;
+  --text-muted:     #4b7a4b;
+  --bg-snow:        #f8fffe;
+}
+
+* { box-sizing: border-box; }
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'DM Sans', system-ui, sans-serif;
+  color: var(--text);
+  background: var(--bg-snow);
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4 {
+  font-family: 'Playfair Display', Georgia, serif;
+}
+
+/* ── Scrollbar ─────────────────────────────────── */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: #f0fdf4; }
+::-webkit-scrollbar-thumb { background: #16a34a; border-radius: 3px; }
+
+/* ── Utilities ─────────────────────────────────── */
+@layer utilities {
+  .text-gradient {
+    background: linear-gradient(135deg, #16a34a, #4ade80);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .mountain-card {
+    background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+    border: 1px solid #bbf7d0;
+    transition: all 0.3s ease;
+  }
+  .mountain-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 20px 60px rgba(22,163,74,0.15);
+    border-color: #4ade80;
+  }
+  .btn-primary {
+    @apply bg-primary-600 hover:bg-primary-700 text-white font-semibold px-6 py-3 rounded-xl transition-all duration-200 shadow-md hover:shadow-green-glow active:scale-95;
+  }
+  .btn-outline {
+    @apply border-2 border-primary-600 text-primary-700 hover:bg-primary-600 hover:text-white font-semibold px-6 py-3 rounded-xl transition-all duration-200;
+  }
+  .section-title {
+    @apply font-display text-3xl md:text-4xl font-bold text-primary-900 leading-tight;
+  }
+  .section-subtitle {
+    @apply text-primary-700 text-lg mt-3 max-w-2xl;
+  }
+}
+
+/* ── WhatsApp floating button ───────────────────── */
+.wa-float {
+  position: fixed;
+  right: 20px;
+  bottom: 90px;
+  z-index: 999;
+  animation: float 4s ease-in-out infinite;
+}
+
+@media (min-width: 768px) {
+  .wa-float { bottom: 30px; }
+}
+
+/* ── Hero text shimmer ──────────────────────────── */
+@keyframes shimmer {
+  0%   { background-position: -200% center; }
+  100% { background-position:  200% center; }
+}
+
+.hero-shimmer {
+  background: linear-gradient(90deg, #4ade80 0%, #86efac 30%, #ffffff 50%, #86efac 70%, #4ade80 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: shimmer 4s linear infinite;
+}
+
+/* ── Badge pulse ────────────────────────────────── */
+@keyframes badge-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(22,163,74,0.4); }
+  70%       { box-shadow: 0 0 0 10px rgba(22,163,74,0);  }
+}
+.badge-pulse { animation: badge-pulse 2s ease-in-out infinite; }
+
+/* ── Leaf decorations ───────────────────────────── */
+.leaf-bg {
+  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%2316a34a' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+}
